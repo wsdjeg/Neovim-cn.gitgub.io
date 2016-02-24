@@ -2,6 +2,9 @@
 
 #### 介绍
 
+1. 什么事NeoVim
+2. [NeoVim和Vim的区别](translation/vim_diff.md)
+
 #### 成员
 
 #### Hot Issues
