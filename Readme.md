@@ -5,3 +5,9 @@
 #### 成员
 
 #### Hot Issues
+
+#### Todo List
+
+1. translate vim-galore
+2. translate vim_diff.txt
+3. introduction about neovim installtion and neovim plugins
