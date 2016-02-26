@@ -90,68 +90,61 @@ Nvim 编译时通常包括所有的特性, 不同于Vim可以在编译时增减�
 Viminfo 文本 文件 被替换为 binary (messagepack) ShaDa files. 
 附加的区别:
 
-- |shada-c| has no effect.
-- |shada-s| now limits size of every item and not just registers.
-- When reading ShaDa files items are merged according to the timestamp. 
+- |shada-c| 没有影响.
+- |shada-s| 目前限制每一个项目的大小,并且不仅仅是寄存器.
+- 当写入ShaDa 文件时,项目是根据时间戳来合并的. 
   |shada-merging|
-- 'viminfo' option got renamed to 'shada'. Old option is kept as an alias for 
-  compatibility reasons.
-- |:wviminfo| was renamed to |:wshada|, |:rviminfo| to |:rshada|.  Old 
-  commands are still kept.
-- |:oldfiles| supports !.
-- When writing (|:wshada| without bang or at exit) it merges much more data, 
-  and does this according to the timestamp.  Vim merges only marks. 
+- 'viminfo' 选项已被重命名为'shada'. 为了兼容性,老的选项被保留作为别名.
+- |:wviminfo| 被改名为|:wshada|, |:rviminfo| 改为|:rshada|.老的命令仍然保留着.
+- |:oldfiles| 支持!.
+- 当写入时(|:wshada| without bang or at exit) 它将合并更多的数据, 
+  并且更具时间戳来进行操作.  Vim 仅仅合并标记.
   |shada-merging|
-- ShaDa file format was designed with forward and backward compatibility in 
-  mind. |shada-compatibility|
-- Some errors make ShaDa code keep temporary file in-place for user to decide 
-  what to do with it.  Vim deletes temporary file in these cases. 
+- ShaDa file 格式设计遵循了向前和向后兼容. |shada-compatibility|
+- 一些错误使得ShaDa code 暂停,并由用户决定该如何操作.  这种情况下Vim删除暂存文件. 
   |shada-error-handling|
-- Vim keeps no timestamps at all, neither in viminfo file nor in the instance 
-  itself.
-- ShaDa file keeps search direction (|v:searchforward|), viminfo does not.
+- Vim 遵循的完全非时间戳, 不仅是viminfo 而且自身实例中也是这样.
+- ShaDa 文件保持这搜索方向 (|v:searchforward|), viminfo 不支持.
 
 ==============================================================================
-4. New Features						     *nvim-features-new*
+4. 新特性						     *nvim-features-new*
 
-See |nvim-intro| for a list of Nvim's largest new features.
+详见 |nvim-intro| 列出了Nvim的大量的新特性.
 
-|bracketed-paste-mode| is built-in and enabled by default.
+|bracketed-paste-mode| is built-in 并且默认开启.
 
-Meta (alt) chords are recognized (even in the terminal).
+Meta (alt) 按键的识别(包括在终端模拟器中).
   <M-1>, <M-2>, ...
   <M-BS>, <M-Del>, <M-Ins>, ...
   <M-/>, <M-\>, ...
   <M-Space>, <M-Enter>, <M-=>, <M-->, <M-?>, <M-$>, ...
 
-  Note: Meta chords are case-sensitive (<M-a> is distinguished from <M-A>).
+  注意: Meta 按键是区分大小写的(<M-a> 区别于 <M-A>).
 
-Some `CTRL-SHIFT-...` key chords are distinguished from `CTRL-...` variants (even in
-the terminal). Specifically, the following are known to work:
+一些 `CTRL-SHIFT-...` 按键相当于`CTRL-...` 的变异(甚至于在终端中). 特别的, 已知一下组合可以正常工作:
   <C-Tab>, <C-S-Tab>
   <C-BS>, <C-S-BS>
   <C-Enter>, <C-S-Enter>
 
-Events:
+事件:
   |TabNew|
   |TabNewEntered|
   |TabClosed|
   |TermOpen|
   |TermClose|
 
-Highlight groups:
+高亮组:
   |hl-EndOfBuffer|
   |hl-TermCursor|
   |hl-TermCursorNC|
 
 ==============================================================================
-5. Missing legacy features				 *nvim-features-missing*
+5. 缺少的特性				 *nvim-features-missing*
 				     *if_ruby* *if_lua* *if_perl* *if_mzscheme* *if_tcl*
 
-These legacy Vim features may be implemented in the future, but they are not
-planned for the current milestone.
+这些遗失的Vim特性将来可能被实现,单这并不计划在近期的里程碑中.
 
-- vim.bindeval() (new feature in Vim 7.4 Python interface)
+- vim.bindeval() (Vim7.4新特性)
 - |if_ruby|
 - |if_lua|
 - |if_perl|
@@ -159,37 +152,37 @@ planned for the current milestone.
 - |if_tcl|
 
 ==============================================================================
-6. Removed features					 *nvim-features-removed*
+6. 移除的特性					 *nvim-features-removed*
 
-These features are in Vim, but have been intentionally removed from Nvim.
+Vim拥有这些特性,但是已经刻意从Nvim中移除 Nvim.
 
-Vi-compatible mode:
-  ":set nocompatible" is ignored
-  ":set compatible" is an error
+Vi-compatible 模式:
+  ":set nocompatible" 将被忽略
+  ":set compatible" 将产生错误
 
 Ed-compatible mode:
-  ":set noedcompatible" is ignored
-  ":set edcompatible" is an error
+  ":set noedcompatible" 被忽略的
+  ":set edcompatible" 错误
 
 'ttyfast':
-  ":set ttyfast" is ignored
-  ":set nottyfast" is an error
+  ":set ttyfast" 忽略
+  ":set nottyfast" 错误
 
-Encryption support:
+加密支持:
   'cryptmethod'
   'key'
 
-MS-DOS support:
+MS-DOS 支持:
   'bioskey'
   'conskey'
 
-Highlight groups:
+高亮组:
   |hl-VisualNOS|
 
-Other options:
+其他选项:
   'antialias'
   'cpoptions' ('g', 'w', 'H', '*', '-', 'j', and all POSIX flags were removed)
-  'guioptions' (only the 't' flag was removed)
+  'guioptions' (只有't' 标记被移除)
   'guipty'
   'imactivatefunc'
   'imactivatekey'
@@ -211,11 +204,11 @@ Other options:
   'ttytype'
   'weirdinvert'
 
-Other commands:
+其他命令:
   :Print
   :fixdel
   :helpfind
-  :mode (no longer accepts an argument)
+  :mode (不再接受参数)
   :open
   :shell
   :tearoff
@@ -225,8 +218,7 @@ Other compile-time features:
   Emacs tags support
   X11 integration (see |x11-selection|)
 
-Nvim does not have a built-in GUI and hence the following aliases have been
-removed: gvim, gex, gview, rgvim, rgview
+Nvim 没有内置的GUI,因此这些映射已被移除: gvim, gex, gview, rgvim, rgview
 
 "Easy mode" (eview, evim, nvim -y)
 "(g)vimdiff" (alias for "(g)nvim -d" |diff-mode|)
